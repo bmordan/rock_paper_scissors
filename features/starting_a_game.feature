@@ -5,8 +5,8 @@ Feature: The player has to enter their name
 
   Scenario:
     Given I have arrived at the "home" page
-    When I enter my "name" in the empy "field"
-    Then I see the question "Wait for another player?"
+    When I enter my "name" in the emtpy "field"
+    Then I see the question "Choose"
 
   Scenario:
     Given I have arrived at the "home" page

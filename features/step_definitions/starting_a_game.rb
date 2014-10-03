@@ -2,7 +2,7 @@ Given(/^I have arrived at the "(.*?)" page$/) do |page|
   visit "/"
 end
 
-When(/^I enter my "(.*?)" in the empy "(.*?)"$/) do |name, player|
+When(/^I enter my "(.*?)" in the emtpy "(.*?)"$/) do |name, player|
   fill_in 'player', :with => name
   click_button 'Start A Game'
 end

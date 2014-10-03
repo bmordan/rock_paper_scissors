@@ -9,5 +9,5 @@ When(/^I click on "(.*?)"$/) do |arg1|
 end
 
 Then(/^I can pick an item$/) do
-  expect(page).to have_content('Choose')
+  expect(page).to have_content('Waiting for another player...')
 end
