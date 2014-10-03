@@ -6,7 +6,11 @@ class Ronin < Sinatra::Base
   set :views, Proc.new { File.join(root, "..", "views") } 
 
   get '/' do
-    'Hello Ronin!'
+    
+  end
+
+  get '/home' do
+    erb :home
   end
 
   run! if app_file == $0
