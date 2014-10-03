@@ -20,5 +20,9 @@ class Ronin < Sinatra::Base
     erb :start
   end
 
+  get '/play/human' do
+    erb :play
+  end
+
   run! if app_file == $0
 end
