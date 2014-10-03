@@ -7,4 +7,5 @@ group :test, :development do
   gem "cucumber"
   gem "cucumber-sinatra"
   gem "capybara"
+  gem "launchy"
 end

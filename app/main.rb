@@ -13,5 +13,11 @@ class Ronin < Sinatra::Base
     erb :home
   end
 
+  get '/start' do
+    puts params.inspect
+    player = params[:player]
+    erb :start
+  end
+
   run! if app_file == $0
 end
