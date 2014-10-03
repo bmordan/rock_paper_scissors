@@ -6,16 +6,17 @@ class Ronin < Sinatra::Base
   set :views, Proc.new { File.join(root, "..", "views") } 
 
   get '/' do
-    
+    erb :home
   end
 
   get '/home' do
+    @prompt = "Enter your Name"
     erb :home
   end
 
   get '/start' do
-    puts params.inspect
-    player = params[:player]
+    redirect '/home' if params[:player] == ""
+    @player = params[:player]
     erb :start
   end
 
