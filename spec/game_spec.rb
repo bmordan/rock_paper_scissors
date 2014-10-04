@@ -4,6 +4,7 @@ describe Game do
   
   let(:game) {Game.new}
   let(:player1) {double :player1}
+  let(:player2) {double :player2}
 
   it "should hold 2 players" do
     game.player1 = player1
@@ -15,10 +16,12 @@ describe Game do
   end
 
   it "should take two gestures and compair" do
+    allow(game.player1).to receive(:wins=)
     expect(game.try("spock","paper")).to be_a(String)
   end
 
   it "should return a winner statement" do
+    allow(game.player1).to receive(:wins=)
     expect(game.try("spock","paper")).to eq("paper disproves spock")
   end
   

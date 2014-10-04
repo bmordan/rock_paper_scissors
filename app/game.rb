@@ -14,12 +14,12 @@ class Game
   end
 
   def try(p1_gesture,p2_gesture)
-    p1_options = @gesture_hash[p1_gesture.to_sym]
-    p2_options = @gesture_hash[p2_gesture.to_sym]
-    p1_results = p1_options.map {|option| option.fetch(p2_gesture.to_sym, false) }
-    p2_results = p2_options.map {|option| option.fetch(p1_gesture.to_sym, false) }
+    p1_results = @gesture_hash[p1_gesture.to_sym].map {|option| option.fetch(p2_gesture.to_sym, false) }
+    p2_results = @gesture_hash[p2_gesture.to_sym].map {|option| option.fetch(p1_gesture.to_sym, false) }
     p1_win = p1_results.select { |option| option != false }
     p2_win = p2_results.select { |option| option != false }
+    p1_win == [] ? player1.wins = false : player1.wins = true
+    p2_win == [] ? player2.wins = false : player2.wins = true
     p1_win == [] ? "#{p2_gesture} #{p2_win[0]} #{p1_gesture}" : "#{p1_gesture} #{p1_win[0]} #{p2_gesture}"
   end
 
