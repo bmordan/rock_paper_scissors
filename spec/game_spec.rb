@@ -24,5 +24,9 @@ describe Game do
     allow(game.player1).to receive(:wins=)
     expect(game.try("spock","paper")).to eq("paper disproves spock")
   end
+
+  it "should load two different gestures for the try function" do
+    expect(game.loaded).to be_a(Array)
+  end
   
 end

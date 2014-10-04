@@ -5,5 +5,5 @@ Feature: Human vs Human mode
   
   Scenario:
     Given I have decided on a gesture
-    When  I click on "Spock"
+    When  I click on "spock"
     Then I goto the results page and see the result

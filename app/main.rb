@@ -35,11 +35,14 @@ class Ronin < Sinatra::Base
       GAME.player1.session_id == session[:session_id] ? @player = GAME.player1.name : @player = GAME.player2.name
       @player == GAME.player1.name ? @other_player = GAME.player2.name : @other_player = GAME.player1.name
     end
+    @hash = GAME.gesture_hash
     erb :play
   end
 
   get '/play' do
-    puts params.inspect
+    session[:gestures] = [{params[:player] => params[:gesture]}]
+    puts session[:gestures].inspect
+    erb :result
   end
 
   run! if app_file == $0

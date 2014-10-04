@@ -1,0 +1,7 @@
+results page
+<% if @p1_gesture.nil? || @p2_gesture.nil? %>
+  Waiting for other player...
+  <meta http-equiv="refresh" content="2">
+<% else %>
+  <%= @p1_gesture %> | <%= @p2_gesture %>
+<% end %>
