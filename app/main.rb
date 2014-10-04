@@ -35,8 +35,6 @@ class Ronin < Sinatra::Base
       GAME.player1.session_id == session[:session_id] ? @player = GAME.player1.name : @player = GAME.player2.name
       @player == GAME.player1.name ? @other_player = GAME.player2.name : @other_player = GAME.player1.name
     end
-
-    puts "The GAME object #{GAME.inspect}"
     erb :play
   end
 
