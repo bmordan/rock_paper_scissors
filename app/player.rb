@@ -1,7 +1,7 @@
 class Player
 
-  attr_reader :name
-  attr_reader :session_id
+  attr_reader   :name
+  attr_reader   :session_id
   attr_accessor :wins
 
   def initialize(options = {})

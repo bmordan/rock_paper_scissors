@@ -26,7 +26,7 @@ describe Game do
   end
 
   it "should load two different gestures for the try function" do
-    expect(game.loaded).to be_a(Array)
+    expect(game.waiting_gestures).to be_a(Array)
   end
   
 end
