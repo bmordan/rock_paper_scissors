@@ -12,6 +12,9 @@ class Ronin < Sinatra::Base
 
   get '/' do
     session[:game] = GAME
+    GAME.waiting_gestures = []
+    GAME.player1 = nil
+    GAME.player2 = nil
     erb :home
   end
 
@@ -27,6 +30,17 @@ class Ronin < Sinatra::Base
     erb :start
   end
 
+  get '/play' do
+    gesture = { player: params[:player], gesture: params[:gesture] }
+    GAME.waiting_gestures << gesture unless GAME.waiting_gestures.include?(gesture)
+    if GAME.waiting_gestures.count == 2
+      @result = GAME.try( GAME.waiting_gestures[0][:gesture] , GAME.waiting_gestures[1][:gesture] )
+      session[:session_id]==GAME.player1.session_id ? player = GAME.player1 : player = GAME.player2
+      player.wins ? @message = "You Win" : @message = "You Lose"      
+    end
+    erb :result
+  end
+
   get '/play/human' do
     GAME.player2.nil? ? @player2="" : @player2=GAME.player2.name
     if GAME.player2.nil?
@@ -39,18 +53,14 @@ class Ronin < Sinatra::Base
     erb :play
   end
 
-  get '/play' do
-    gesture = { player: params[:player], gesture: params[:gesture] }
-    GAME.waiting_gestures << gesture unless GAME.waiting_gestures.include?(gesture)
-    if GAME.waiting_gestures.count == 2
-      @result = GAME.try( GAME.waiting_gestures[0][:gesture] , GAME.waiting_gestures[1][:gesture] )
-      GAME.player1.wins == true ? @wins = "#{GAME.player1.name} Wins!"  : @wins = "#{GAME.player2.name} Wins!"
-      GAME.player1.wins == true ? @lose = "#{GAME.player2.name} Loses!" : @lose = "#{GAME.player1.name} Loses!"
-    else
-      @result
-    end
-    erb :result
+  get '/play/human/reset' do
+    GAME.waiting_gestures = []
+    redirect '/play/human'
   end
-
+  
   run! if app_file == $0
 end
+
+
+
+

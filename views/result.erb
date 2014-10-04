@@ -1,7 +1,8 @@
 <% if @result %>
-  <%= @wins   %>
-  <%= @lose   %>
+  <%= @message %>
   <%= @result %>
+  <a href="/play/human/reset">Play Again</a>
+  <a href="/">Start A New Game</a>
 <% else %>
   Waiting for other player...
   <meta http-equiv="refresh" content="2">
