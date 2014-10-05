@@ -1,0 +1,12 @@
+OK <%= @player %> you are playing <%= @other_player %>
+ <ul>
+ <% @hash.keys.each do |gesture| %>
+  <li>
+    <a href="/play?gesture=<%= gesture %>&player=<%= @player %>">
+    <img src="/images/<%= gesture %>.svg"></a>
+  </li>
+  <% end %>
+</ul>
+
+
+
