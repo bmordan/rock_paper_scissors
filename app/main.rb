@@ -53,13 +53,19 @@ class Ronin < Sinatra::Base
     erb :play_human
   end
 
-  get '/play/human/reset' do
+  get '/play/reset' do
     GAME.waiting_gestures = []
-    redirect '/play/human'
+    if GAME.player2.name == "Robot"
+      redirect '/play/robot'
+    else
+      redirect '/play/human'
+    end  
   end
 
   get '/play/robot' do
     GAME.player2 = Player.new({name: "Robot",session_id: "00"})
+    robot_gesture = {player: "Robot", gesture: GAME.gesture_hash.keys.sample.to_s}
+    GAME.waiting_gestures << robot_gesture
     @player=GAME.player1.name
     @other_player=GAME.player2.name
     @hash = GAME.gesture_hash
