@@ -5,7 +5,7 @@
    <ul>
   <% @hash.keys.each do |gesture| %>
     <li>
-      <a href="/play?gesture=<%= gesture %>&player=<%= @player %>">
+      <a href="/play?gesture=<%= gesture %>&player=<%= @player %>" id="<%= gesture %>">
       <img src="/images/<%= gesture %>.svg" class="gesture-image">
       </a>
     </li>

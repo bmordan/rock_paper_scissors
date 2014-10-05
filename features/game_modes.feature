@@ -12,3 +12,19 @@ Feature: The player chooses an opponent
     Given my friends are not around
     When I have entered my name "Amy" I click on robot
     Then I see the message "OK Amy you are playing Robot"
+
+  Scenario:
+    Given I am playing a robot
+    When I choose an option
+    Then I see the results page
+
+  Scenario:
+    Given I have finished playing
+    When I choose to leave the game
+    Then I get to start again
+
+  Scenario:
+    Given I want to play again  
+    When I reset
+    Then I get to play again
+   
