@@ -7,7 +7,9 @@ body{font-family: 'Open Sans', sans-serif;}
   top: 0;
   left: 0;
 }
-p{line-height: 1.6em;}
+p, h2{line-height: 1.6em;}
+span.magenta{color: rgb(163,23,173);}
+span.blue{color: rgb(23,33,173);}
 a{text-decoration: none;color: rgb(33,173,23);}
 li{list-style-type: none;}
 /* home.erb */

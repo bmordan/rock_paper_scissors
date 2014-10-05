@@ -1,5 +1,6 @@
   <hgroup>
-  <h2>OK <%= @player %> you are playing a <%= @other_player %></h2>
+    <h2>OK <span class="magenta"><%= @player %></span> you are <br />playing <span class="blue"><%= @other_player %></span>
+    </h2>
   </hgroup>
    <ul>
   <% @hash.keys.each do |gesture| %>

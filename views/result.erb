@@ -1,4 +1,4 @@
-<% if @result %>
+<% if @result && @result != "Draw" %>
   <hgroup>
     <%= @message %>
   </hgroup>
@@ -10,7 +10,16 @@
     <a href="/play/reset"><i class="fa fa-refresh fa-5x"></i></a>
     <a href="/"><i class="fa fa-share fa-5x"></i></a>
   </section>
+<% elsif @result == "Draw" %>
+  <hgroup>No Winner</hgroup>
+  <section>
+    <p><%= @result %></p>
+    <a href="/play/reset"><i class="fa fa-refresh fa-5x"></i></a>
+    <a href="/"><i class="fa fa-share fa-5x"></i></a>
+  </section>
 <% else %>
-  Waiting for other player...
+  <hgroup>
+  <h2>Waiting for other player...</h2>
   <meta http-equiv="refresh" content="2">
+  </hgroup>
 <% end %>
