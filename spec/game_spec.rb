@@ -28,5 +28,10 @@ describe Game do
   it "should load two different gestures for the try function" do
     expect(game.waiting_gestures).to be_a(Array)
   end
+
+  it "should deal with a draw" do
+    allow(game.player1).to receive(:wins=)
+    expect(game.try("paper","paper")).to eq("Draw")
+  end
   
 end
