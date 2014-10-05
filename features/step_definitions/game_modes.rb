@@ -4,8 +4,8 @@ Given(/^I have a friend wanting to play with me$/) do
   click_on 'Start A Game'
 end
 
-When(/^I have entered my "(.*?)" I click on "(.*?)"$/) do |name, link|
-  click_link link
+When(/^I have entered my name I click on friends$/) do
+  click_link 'human'
 end
 
 Then(/^I see the message "(.*?)"$/) do |message|
@@ -13,15 +13,15 @@ Then(/^I see the message "(.*?)"$/) do |message|
 end
 
 Given(/^my friends are not around$/) do
-   visit '/'
-  fill_in 'player', with: "bobster"
+  visit '/'
+  fill_in 'player', with: "Amy"
   click_on 'Start A Game' 
 end
 
-When(/^I have entered my name I click on "(.*?)"$/) do |link|
-  click_link link
+When(/^I have entered my name "(.*?)" I click on robot$/) do |player|
+  click_link 'robot'
 end
 
-Then(/^I see the message OK "(.*?)" you are playing Robot$/) do |arg1|
-  expect(page).to have_content('OK bobster you are playing Robot')
+Then(/^I see the message OK you are playing a Robot$/) do
+  expect(page).to have_content('OK #{player} you are playing Robot')
 end

@@ -16,4 +16,4 @@ Feature: The player has to enter their name
   Scenario:
     Given I have entered a name
     When I arrive at the start page
-    Then I can choose to play a "person" or my "phone"
+    Then I can choose to play alone or with friends

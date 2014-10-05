@@ -28,6 +28,6 @@ When(/^I arrive at the start page$/) do
   click_button 'Start A Game'
 end
 
-Then(/^I can choose to play a "(.*?)" or my "(.*?)"$/) do |human, phone|
-  expect(page).to have_content "Human"
+Then(/^I can choose to play alone or with friends$/) do
+  expect(page).to have_content "alone"
 end
