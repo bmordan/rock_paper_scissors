@@ -3,7 +3,7 @@
 ![enter image description here](https://pbs.twimg.com/media/BzBXj1uIIAABtlq.jpg)
 ####Create a web app using Sinatra & Ruby.  Write acceptance tests in cucumber and unit tests in rspec.
 
-![add a name](https://lh4.googleusercontent.com/-cPICyX58rTk/VDGJu-jMuAI/AAAAAAAAEKk/llloTqAso0g/w788-h1178-no/01.jpg)
+![add a name](https://lh4.googleusercontent.com/-cPICyX58rTk/VDGJu-jMuAI/AAAAAAAAEKk/llloTqAso0g/w788-h1178-no/01.jpg =120x)
 
 ![Two game modes](https://lh5.googleusercontent.com/-WqBw_J0-SiY/VDGJu0tziEI/AAAAAAAAEKY/FGDIoff36LA/w786-h1178-no/02.jpg)
 
