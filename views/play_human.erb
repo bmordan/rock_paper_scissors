@@ -1,12 +1,19 @@
 <% if @player2 == "" %>
-  <p>Waiting for another player...</p>
+<hgroup>
+  <ul><li>Waiting for another player...</li></ul>
   <meta http-equiv="refresh" content="2">
+</hgroup>  
 <% else %>
-  OK <%= @player %> you are playing <%= @other_player %>
+  <hgroup>
+  <h2>OK <%= @player %> you are playing <%= @other_player %></h2>
+  </hgroup>
   <ul>
   <% @hash.keys.each do |gesture| %>
-    <li><a href="/play?gesture=<%= gesture %>&player=<%= @player %>">
-    <img src="/images/<%= gesture %>.svg"></a></li>
+    <li>
+      <a href="/play?gesture=<%= gesture %>&player=<%= @player %>">
+      <img src="/images/<%= gesture %>.svg" class="gesture-image">
+      </a>
+    </li>
   <% end %>
   </ul>
 <% end %>

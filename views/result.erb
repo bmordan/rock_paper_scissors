@@ -1,8 +1,15 @@
 <% if @result %>
-  <%= @message %>
-  <%= @result %>
-  <a href="/play/reset">Play Again</a>
-  <a href="/">Start A New Game</a>
+  <hgroup>
+    <%= @message %>
+  </hgroup>
+  <section>
+    <% img = @result.split %>
+    <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
+    <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
+    <p><%= @result %></p>
+    <a href="/play/reset"><i class="fa fa-refresh fa-5x"></i></a>
+    <a href="/"><i class="fa fa-share fa-5x"></i></a>
+  </section>
 <% else %>
   Waiting for other player...
   <meta http-equiv="refresh" content="2">

@@ -1,24 +1,33 @@
 img{max-width: 100%}
-#logo{width:100%;}
+body{font-family: 'Open Sans', sans-serif;}
+#logo{
+  width:100%;
+  z-index:10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+p{line-height: 1.6em;}
 a{text-decoration: none;color: rgb(33,173,23);}
+li{list-style-type: none;}
 /* home.erb */
 body main form{
-  width:90%;
-  margin:auto;
+  width:80%;
+  margin: 2em auto 1.5em auto;
 }
 body main form input{
   display: block;
   margin-top: 1em;
-  font-size: 2em;
+  font-size: 1em;
+  line-height: 1.6em;
   text-align: center;
   width: 100%;
 }
 /* start.erb */
-
 body main hgroup{
   font-size: 2em;
   text-align: center;
-  margin: 2em auto 1.5em auto;
+  margin: 3em auto 1.5em auto;
 }
 body main section{
   width:80%;
@@ -31,5 +40,30 @@ body main section p{
 }
 body main section a{
   display: inline-block;
-  margin: 2em;
+  width:48%;
 }
+body main section i{
+  margin: 0% 20% 0% 20%;
+}
+/* play_human play_robot */
+body main ul{
+  width:70%;
+  margin:auto;
+}
+body main li{
+  width:100%;
+}
+body main .gesture-image{
+  width: 100%;
+  margin-bottom: 2em;
+}
+/* result */
+body main .gesture-image-win{
+  width: 48%;
+}
+body main .gesture-image-lose{
+  margin-left: 2em;
+  padding-bottom: 1.6em;
+  width: 33%;
+}
+

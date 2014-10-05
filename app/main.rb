@@ -36,7 +36,7 @@ class Ronin < Sinatra::Base
     if GAME.waiting_gestures.count == 2
       @result = GAME.try( GAME.waiting_gestures[0][:gesture] , GAME.waiting_gestures[1][:gesture] )
       session[:session_id]==GAME.player1.session_id ? player = GAME.player1 : player = GAME.player2
-      player.wins ? @message = "You Win" : @message = "You Lose"      
+      player.wins ? @message = "You Win" : @message = "You Lose"    
     end
     erb :result
   end
