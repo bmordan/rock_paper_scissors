@@ -24,8 +24,9 @@ class Game
     p1 = p1_gesture.to_sym
     p2 = p2_gesture.to_sym
     return "Draw" if p1 == p2
-    result = find_a_gesture(p1, p2)
-    find_a_gesture(p2, p1) if result.nil?
+    try = find_a_gesture(p1, p2)
+    find_a_gesture(p2, p1) if try.nil?
+    return try
   end
 
   def find_a_gesture(win_gesture, lose_gesture)

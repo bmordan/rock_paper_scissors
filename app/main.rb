@@ -33,15 +33,15 @@ class Ronin < Sinatra::Base
   end
 
   get '/play' do
-    @result
     gesture = { player: params[:player], gesture: params[:gesture] }
     GAME.waiting_gestures << gesture unless GAME.waiting_gestures.include?(gesture)
-    if GAME.waiting_gestures.count == 2
-      @result = GAME.try(
-        GAME.waiting_gestures[0][:gesture],
-        GAME.waiting_gestures[1][:gesture]
-      )
-    end
+    @message = GAME.try(
+      GAME.waiting_gestures[0][:gesture],
+      GAME.waiting_gestures[1][:gesture]
+    )
+    puts "/play"
+    @message = "refresh" if @message.nil?
+    puts @message
     erb :result
   end
 
@@ -58,13 +58,14 @@ class Ronin < Sinatra::Base
   end
 
   get '/play/robot' do
-    puts GAME.players.inspect
     GAME.players << Player.new(
       :name => "Robot",
-      :session_id => "0101010101010101010"
+      :session_id => "0"
     )
-    robot_gesture = {player: "Robot", gesture: GAME.gesture_hash.keys.sample.to_s}
-    GAME.waiting_gestures << robot_gesture
+    GAME.waiting_gestures << {
+      player: "Robot",
+      gesture: GAME.gesture_hash.keys.sample.to_s
+    }
     @player=GAME.player(1).name
     @other_player=GAME.player(2).name
     @hash = GAME.gesture_hash
@@ -74,6 +75,7 @@ class Ronin < Sinatra::Base
   get '/play/reset' do
     GAME.waiting_gestures = []
     if GAME.player(2).name == "Robot"
+      GAME.players.delete(GAME.player(2))
       redirect '/play/robot'
     else
       redirect '/play/human'
