@@ -1,11 +1,11 @@
 class Game
-  
-  attr_accessor :player1
-  attr_accessor :player2
+
+  attr_accessor :players
   attr_accessor :waiting_gestures
   attr_reader   :gesture_hash
 
   def initialize
+    @players ||= []
     @gesture_hash = {
       :rock    => [{:sissors => "crushes"},{:lizard => "crushes"}],
       :lizard  => [{:paper => "eats"},{:spock => "poisons"}],
@@ -13,6 +13,10 @@ class Game
       :sissors => [{:paper => "cuts"},{:lizard => "decapitates"}],
       :paper   => [{:rock => "covers"},{:spock => "disproves"}]
     }
+  end
+
+  def player(playerNumber)
+    @players[playerNumber-1]
   end
 
   def try(p1_gesture, p2_gesture)

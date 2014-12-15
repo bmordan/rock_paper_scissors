@@ -7,8 +7,8 @@ describe Game do
   let(:player2) {double :player2}
 
   it "should hold 2 players" do
-    game.player1 = player1
-    expect(game.player1).to eq(player1)
+    game.players << player1
+    expect(game.player(1)).to eq(player1)
   end
 
   it "should hold the gesture_hash" do
