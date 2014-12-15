@@ -12,9 +12,8 @@ class Ronin < Sinatra::Base
 
   get '/' do
     session[:game] = GAME
+    GAME.session_id = session[:session_id]
     GAME.waiting_gestures = []
-    GAME.player1 = nil
-    GAME.player2 = nil
     erb :home
   end
 
@@ -25,8 +24,11 @@ class Ronin < Sinatra::Base
 
   get '/start' do
     redirect '/home' if params[:player] == ""
-    player = Player.new(:name => params[:player], :session_id => session[:session_id])
-    GAME.player1.nil? ? GAME.player1=player : GAME.player2=player
+    player = Player.new(
+      :name => params[:player],
+      :session_id => session[:session_id]
+    )
+    GAME.players << player
     erb :start
   end
 
@@ -52,6 +54,20 @@ class Ronin < Sinatra::Base
     erb :play_human
   end
 
+  get '/play/robot' do
+    session['robot'] = true
+    GAME.players << Player.new(
+      name: "Robot",
+      session_id: "0101010101010101010"
+    )
+    robot_gesture = {player: "Robot", gesture: GAME.gesture_hash.keys.sample.to_s}
+    GAME.waiting_gestures << robot_gesture
+    @player=GAME.player(1).name
+    @other_player=GAME.player(2).name
+    @hash = GAME.gesture_hash
+    erb :play_robot
+  end
+
   get '/play/reset' do
     GAME.waiting_gestures = []
     if GAME.player2.name == "Robot"
@@ -63,16 +79,7 @@ class Ronin < Sinatra::Base
     end
   end
 
-  get '/play/robot' do
-    session['robot'] = true
-    GAME.player2 = Player.new({name: "Robot",session_id: "0101010101010101010"})
-    robot_gesture = {player: "Robot", gesture: GAME.gesture_hash.keys.sample.to_s}
-    GAME.waiting_gestures << robot_gesture
-    @player=GAME.player1.name
-    @other_player=GAME.player2.name
-    @hash = GAME.gesture_hash
-    erb :play_robot
-  end
+
 
   run! if app_file == $0
 end

@@ -4,11 +4,15 @@ describe Game do
 
   let(:game) {Game.new}
   let(:player1) {double :player1}
-  let(:player2) {double :player2}
+  let(:player2) {double :player2, name: "player2", session_id: "0000"}
 
-  it "should hold 2 players" do
+  it "should hold players" do
     game.players << player1
     expect(game.player(1)).to eq(player1)
+  end
+
+  it "should return true or false if the session is that players session" do
+    expect(game.is?(player2)).to be(true)
   end
 
   it "should hold the gesture_hash" do

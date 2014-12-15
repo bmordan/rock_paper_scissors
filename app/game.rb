@@ -1,6 +1,7 @@
 class Game
 
   attr_accessor :players
+  attr_accessor :session_id
   attr_accessor :waiting_gestures
   attr_reader   :gesture_hash
 
@@ -37,6 +38,10 @@ class Game
 
   def waiting_gestures
     @waiting_gestures ||= []
+  end
+
+  def is?(player)
+    player.session_id == @session_id
   end
 
 end
