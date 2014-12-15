@@ -11,10 +11,6 @@ describe Game do
     expect(game.player(1)).to eq(player1)
   end
 
-  it "should return true or false if the session is that players session" do
-    expect(game.is?(player2)).to be(true)
-  end
-
   it "should hold the gesture_hash" do
     expect(game.gesture_hash).to be_a(Hash)
   end

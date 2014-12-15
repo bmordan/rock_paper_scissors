@@ -33,32 +33,35 @@ class Ronin < Sinatra::Base
   end
 
   get '/play' do
+    @result
     gesture = { player: params[:player], gesture: params[:gesture] }
     GAME.waiting_gestures << gesture unless GAME.waiting_gestures.include?(gesture)
-    if GAME.waiting_gestures.count == 2 || session['robot'] = true
-      @result = GAME.try(GAME.waiting_gestures[0][:gesture], GAME.waiting_gestures[1][:gesture])
-      session[:session_id]==GAME.player1.session_id ? player=GAME.player1 : player=GAME.player2
+    if GAME.waiting_gestures.count == 2
+      @result = GAME.try(
+        GAME.waiting_gestures[0][:gesture],
+        GAME.waiting_gestures[1][:gesture]
+      )
     end
     erb :result
   end
 
   get '/play/human' do
-    GAME.player2.nil? ? @player2="" : @player2=GAME.player2.name
-    if GAME.player2.nil?
-      @player2 == ""
-    else
-      GAME.player1.session_id==session[:session_id] ? @player=GAME.player1.name : @player=GAME.player2.name
-      @player==GAME.player1.name ? @other_player=GAME.player2.name : @other_player=GAME.player1.name
-    end
-    @hash = GAME.gesture_hash
-    erb :play_human
+    # GAME.player2.nil? ? @player2="" : @player2=GAME.player2.name
+    # if GAME.player2.nil?
+    #   @player2 == ""
+    # else
+    #   GAME.player1.session_id==session[:session_id] ? @player=GAME.player1.name : @player=GAME.player2.name
+    #   @player==GAME.player1.name ? @other_player=GAME.player2.name : @other_player=GAME.player1.name
+    # end
+    # @hash = GAME.gesture_hash
+    # erb :play_human
   end
 
   get '/play/robot' do
-    session['robot'] = true
+    puts GAME.players.inspect
     GAME.players << Player.new(
-      name: "Robot",
-      session_id: "0101010101010101010"
+      :name => "Robot",
+      :session_id => "0101010101010101010"
     )
     robot_gesture = {player: "Robot", gesture: GAME.gesture_hash.keys.sample.to_s}
     GAME.waiting_gestures << robot_gesture
@@ -70,9 +73,7 @@ class Ronin < Sinatra::Base
 
   get '/play/reset' do
     GAME.waiting_gestures = []
-    if GAME.player2.name == "Robot"
-      GAME.player2 = nil
-      session['robot'] = false
+    if GAME.player(2).name == "Robot"
       redirect '/play/robot'
     else
       redirect '/play/human'

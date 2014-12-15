@@ -1,6 +1,6 @@
 <% if @result && @result != "Draw" %>
   <hgroup>
-    <%= @result %>
+    <%= @win_lose %>
   </hgroup>
   <section>
     <% img = @result.split(' ') %>
@@ -17,7 +17,7 @@
     <a href="/play/reset" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
     <a href="/" id="exit"><i class="fa fa-share fa-5x"></i></a>
   </section>
-<% else %>
+<% elsif @result.nil? %>
   <hgroup>
   <h2>Waiting for other player...</h2>
   <meta http-equiv="refresh" content="2">

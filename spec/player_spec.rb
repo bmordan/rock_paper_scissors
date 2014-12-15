@@ -19,5 +19,10 @@ describe Player do
   it "will error if the player has no session_id" do
     expect( lambda {Player.new(name: "Ron")} ).to raise_error(RuntimeError)
   end
-  
+
+  it "a player has a win status" do
+    player.win = true
+    expect(player.win).to be(true)
+  end
+
 end
