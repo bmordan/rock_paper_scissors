@@ -1,7 +1,7 @@
 require_relative '../app/game'
 
 describe Game do
-  
+
   let(:game) {Game.new}
   let(:player1) {double :player1}
   let(:player2) {double :player2}
@@ -15,13 +15,15 @@ describe Game do
     expect(game.gesture_hash).to be_a(Hash)
   end
 
-  it "should take two gestures and compair" do
-    allow(game.player1).to receive(:wins=)
-    expect(game.try("spock","paper")).to be_a(String)
+  it "can take a gesture and find it in the hash" do
+    expect(game.find_a_gesture(:paper,:spock)).to eq("paper disproves spock")
   end
 
-  it "should return a winner statement" do
-    allow(game.player1).to receive(:wins=)
+  it "but only if the winning gesture is passed in first" do
+    expect(game.find_a_gesture(:spock,:paper)).to eq(nil)
+  end
+
+  it "should take two gestures and compair" do
     expect(game.try("spock","paper")).to eq("paper disproves spock")
   end
 
@@ -30,8 +32,7 @@ describe Game do
   end
 
   it "should deal with a draw" do
-    allow(game.player1).to receive(:wins=)
     expect(game.try("paper","paper")).to eq("Draw")
   end
-  
+
 end

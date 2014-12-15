@@ -1,9 +1,10 @@
 class Game
+  
   attr_accessor :player1
   attr_accessor :player2
   attr_accessor :waiting_gestures
-  attr_reader   :gesture_hash 
-  
+  attr_reader   :gesture_hash
+
   def initialize
     @gesture_hash = {
       :rock    => [{:sissors => "crushes"},{:lizard => "crushes"}],
@@ -14,18 +15,20 @@ class Game
     }
   end
 
-  def try(p1_gesture,p2_gesture)  
-    p1_results = @gesture_hash[p1_gesture.to_sym].map {|option| option.fetch(p2_gesture.to_sym, false) }
-    p2_results = @gesture_hash[p2_gesture.to_sym].map {|option| option.fetch(p1_gesture.to_sym, false) }
-    p1_win     = p1_results.select { |option| option  != false }
-    p2_win     = p2_results.select { |option| option  != false }
-    p1_win == [] ? player1.wins = false : player1.wins = true
-    p2_win == [] ? player2.wins = false : player2.wins = true
-    if p1_gesture == p2_gesture
-      "Draw"
-    else
-      p1_win == [] ? "#{p2_gesture} #{p2_win[0]} #{p1_gesture}" : "#{p1_gesture} #{p1_win[0]} #{p2_gesture}"
-    end  
+  def try(p1_gesture, p2_gesture)
+    p1 = p1_gesture.to_sym
+    p2 = p2_gesture.to_sym
+    return "Draw" if p1 == p2
+    result = find_a_gesture(p1, p2)
+    find_a_gesture(p2, p1) if result.nil?
+  end
+
+  def find_a_gesture(win_gesture, lose_gesture)
+    result = nil
+    @gesture_hash[win_gesture].each do |gesture|
+      result = gesture[lose_gesture] unless gesture[lose_gesture].nil?
+    end
+    "#{win_gesture.to_s} #{result} #{lose_gesture.to_s}" unless result.nil?
   end
 
   def waiting_gestures

@@ -1,9 +1,9 @@
 <% if @result && @result != "Draw" %>
   <hgroup>
-    <%= @message %>
+    <%= @result %>
   </hgroup>
   <section>
-    <% img = @result.split %>
+    <% img = @result.split(' ') %>
     <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
     <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
     <p><%= @result %></p>

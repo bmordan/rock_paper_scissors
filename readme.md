@@ -1,4 +1,4 @@
-##Ronin Badge Test
+[![Code Climate](https://codeclimate.com/github/bmordan/rock_paper_scissors/badges/gpa.svg)](https://codeclimate.com/github/bmordan/rock_paper_scissors)
 ###Rock, Paper, Scissors, Spock, Lizard
 ![enter image description here](https://pbs.twimg.com/media/BzBXj1uIIAABtlq.jpg)
 ####Create a web app using Sinatra & Ruby.  Write acceptance tests in cucumber and unit tests in rspec.
