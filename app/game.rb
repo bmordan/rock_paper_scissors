@@ -25,8 +25,7 @@ class Game
     p2 = p2_gesture.to_sym
     return "Draw" if p1 == p2
     try = find_a_gesture(p1, p2)
-    find_a_gesture(p2, p1) if try.nil?
-    return try
+    find_a_gesture(p2, p1) if try == "lose"
   end
 
   def find_a_gesture(win_gesture, lose_gesture)
@@ -34,7 +33,7 @@ class Game
     @gesture_hash[win_gesture].each do |gesture|
       result = gesture[lose_gesture] unless gesture[lose_gesture].nil?
     end
-    "#{win_gesture.to_s} #{result} #{lose_gesture.to_s}" unless result.nil?
+    result.nil? ? "lose" : "#{win_gesture.to_s} #{result} #{lose_gesture.to_s}"
   end
 
   def waiting_gestures

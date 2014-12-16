@@ -20,14 +20,14 @@ describe Game do
   end
 
   it "but only if the winning gesture is passed in first" do
-    expect(game.find_a_gesture(:spock,:paper)).to eq(nil)
+    expect(game.find_a_gesture(:spock,:paper)).to eq("lose")
   end
 
-  it "should take two gestures and compair" do
+  it "you get back a string statement" do
     expect(game.try("spock","paper")).to eq("paper disproves spock")
   end
 
-  it "should load two different gestures for the try function" do
+  it "there is somewhere to store a waiting gesture" do
     expect(game.waiting_gestures).to be_a(Array)
   end
 
