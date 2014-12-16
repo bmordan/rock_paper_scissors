@@ -35,8 +35,23 @@ class RockPaperScissors < Sinatra::Base
     erb :play_robot
   end
 
+  get '/play_human' do
+    puts GAME.players.length
+
+    if GAME.players.length == 2
+      puts GAME.is?(GAME.player(1))
+      puts GAME.is?(GAME.player(2))
+      
+      GAME.is?(GAME.player(1)) ? @player = GAME.player(1) : @player = GAME.player(2)
+      @hash = GAME.gesture_hash
+      erb :play_human
+    else
+      erb :waiting
+    end
+  end
+
   get '/play_gesture' do
-    GAME.waiting_gestures << params
+    GAME.waiting_gestures << params unless GAME.waiting_gestures.include?(params)
     @result = GAME.try(
       GAME.waiting_gestures[0]['gesture'],
       GAME.waiting_gestures[1]['gesture']
@@ -52,6 +67,15 @@ class RockPaperScissors < Sinatra::Base
       redirect '/play_robot'
     else
       puts "move to human logic"
+    end
+  end
+
+  get '/waiting' do
+    GAME.waiting_gestures << params unless GAME.waiting_gestures.include?(params)
+    if GAME.waiting_gestures.length == 2
+      redirect '/play_gesture'
+    else
+      erb :waiting
     end
   end
 

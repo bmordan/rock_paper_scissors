@@ -38,7 +38,7 @@ class Game
   end
 
   def is?(player)
-    player.session_id == @session_id
+    player[:session_id] == @session_id
   end
 
   def reset
