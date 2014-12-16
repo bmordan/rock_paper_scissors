@@ -39,9 +39,8 @@ class Ronin < Sinatra::Base
       GAME.waiting_gestures[0][:gesture],
       GAME.waiting_gestures[1][:gesture]
     )
-    puts "/play"
     @message = "refresh" if @message.nil?
-    puts @message
+    @winner = GAME.waiting_gestures.select {|player| player[:gesture] == @message.split(' ').first}
     erb :result
   end
 
