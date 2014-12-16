@@ -7,12 +7,13 @@ class Game
 
   def initialize
     @players ||= []
+    @waiting_gestures ||= []
     @gesture_hash = {
-      :rock    => [{:sissors => "crushes"},{:lizard => "crushes"}],
-      :lizard  => [{:paper => "eats"},{:spock => "poisons"}],
-      :spock   => [{:sissors => "smashes"},{:rock => "vaporizes"}],
-      :sissors => [{:paper => "cuts"},{:lizard => "decapitates"}],
-      :paper   => [{:rock => "covers"},{:spock => "disproves"}]
+      :rock     => [{:scissors => "crushes"},{:lizard => "crushes"}],
+      :lizard   => [{:paper => "eats"},{:spock => "poisons"}],
+      :spock    => [{:scissors => "smashes"},{:rock => "vaporizes"}],
+      :scissors => [{:paper => "cuts"},{:lizard => "decapitates"}],
+      :paper    => [{:rock => "covers"},{:spock => "disproves"}]
     }
   end
 
@@ -25,7 +26,7 @@ class Game
     p2 = p2_gesture.to_sym
     return "Draw" if p1 == p2
     try = find_a_gesture(p1, p2)
-    find_a_gesture(p2, p1) if try == "lose"
+    try == "lose" ? find_a_gesture(p2, p1) : try
   end
 
   def find_a_gesture(win_gesture, lose_gesture)
@@ -36,12 +37,13 @@ class Game
     result.nil? ? "lose" : "#{win_gesture.to_s} #{result} #{lose_gesture.to_s}"
   end
 
-  def waiting_gestures
-    @waiting_gestures ||= []
-  end
-
   def is?(player)
     player.session_id == @session_id
+  end
+
+  def reset
+    @waiting_gestures = []
+    @players = []
   end
 
 end

@@ -1,11 +1,7 @@
 <hgroup>
-  <% if @prompt %>
-    Enter your Name
-  <% else %>
-    &nbsp;
-  <% end %>
+  What's your name?
 </hgroup>
-<form action="/start" method="get">
+<form action="/add_player" method="post">
   <input type="text" name="player" placeholder="What's your name?">
   <input type="submit" value="Start A Game">
 </form>

@@ -2,7 +2,7 @@ require 'sinatra/base'
 require_relative './player'
 require_relative './game'
 
-class Ronin < Sinatra::Base
+class RockPaperScissors < Sinatra::Base
 
   set    :public_folder, 'public'
   set    :views, Proc.new { File.join(root, "..", "views") }
@@ -11,77 +11,49 @@ class Ronin < Sinatra::Base
   GAME = Game.new
 
   get '/' do
+    GAME.reset
     session[:game] = GAME
     GAME.session_id = session[:session_id]
-    GAME.waiting_gestures = []
     erb :home
   end
 
-  get '/home' do
-    @prompt = "Enter your Name"
-    erb :home
+  post '/add_player' do
+    GAME.players << {name: params[:player],session: session[:session_id]}
+    redirect '/select_game_mode'
   end
 
-  get '/start' do
-    redirect '/home' if params[:player] == ""
-    player = Player.new(
-      :name => params[:player],
-      :session_id => session[:session_id]
-    )
-    GAME.players << player
-    erb :start
+  get '/select_game_mode' do
+    @player = GAME.players.last
+    erb :game_mode
   end
 
-  get '/play' do
-    gesture = { player: params[:player], gesture: params[:gesture] }
-    GAME.waiting_gestures << gesture unless GAME.waiting_gestures.include?(gesture)
-    @message = GAME.try(
-      GAME.waiting_gestures[0][:gesture],
-      GAME.waiting_gestures[1][:gesture]
-    )
-    @message = "refresh" if @message.nil?
-    @winner = GAME.waiting_gestures.select {|player| player[:gesture] == @message.split(' ').first}
-    erb :result
-  end
-
-  get '/play/human' do
-    # GAME.player2.nil? ? @player2="" : @player2=GAME.player2.name
-    # if GAME.player2.nil?
-    #   @player2 == ""
-    # else
-    #   GAME.player1.session_id==session[:session_id] ? @player=GAME.player1.name : @player=GAME.player2.name
-    #   @player==GAME.player1.name ? @other_player=GAME.player2.name : @other_player=GAME.player1.name
-    # end
-    # @hash = GAME.gesture_hash
-    # erb :play_human
-  end
-
-  get '/play/robot' do
-    GAME.players << Player.new(
-      :name => "Robot",
-      :session_id => "0"
-    )
-    GAME.waiting_gestures << {
-      player: "Robot",
-      gesture: GAME.gesture_hash.keys.sample.to_s
-    }
-    @player=GAME.player(1).name
-    @other_player=GAME.player(2).name
-    @hash = GAME.gesture_hash
+  get '/play_robot' do
+    GAME.players << {name: "Robot", session: "0"}
+    GAME.waiting_gestures << {"player" => "Robot", "gesture" => GAME.gesture_hash.keys.sample.to_s}
+    @player = GAME.player(1)[:name]
+    @hash   = GAME.gesture_hash
     erb :play_robot
   end
 
-  get '/play/reset' do
-    GAME.waiting_gestures = []
-    if GAME.player(2).name == "Robot"
-      GAME.players.delete(GAME.player(2))
-      redirect '/play/robot'
-    else
-      redirect '/play/human'
-    end
+  get '/play_gesture' do
+    GAME.waiting_gestures << params
+    @result = GAME.try(
+      GAME.waiting_gestures[0]['gesture'],
+      GAME.waiting_gestures[1]['gesture']
+    )
+    @winner = GAME.waiting_gestures.select {|player| player['gesture'] == @result.split(' ').first}
+    erb :result
   end
 
-
+  get '/replay' do
+    GAME.waiting_gestures = []
+    if GAME.player(2)[:name] == "Robot"
+      GAME.players.delete(GAME.player(2))
+      redirect '/play_robot'
+    else
+      puts "move to human logic"
+    end
+  end
 
   run! if app_file == $0
 end

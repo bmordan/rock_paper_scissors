@@ -4,7 +4,7 @@ describe Game do
 
   let(:game) {Game.new}
   let(:player1) {double :player1}
-  let(:player2) {double :player2, name: "player2", session_id: "0000"}
+  let(:player2) {double :player2, name: "player2", session: "0"}
 
   it "should hold players" do
     game.players << player1
@@ -33,6 +33,14 @@ describe Game do
 
   it "should deal with a draw" do
     expect(game.try("paper","paper")).to eq("Draw")
+  end
+
+  it "can reset it self" do
+    game.waiting_gestures << {}
+    game.players << {}
+    game.reset
+    expect(game.players.length).to eq(0)
+    expect(game.waiting_gestures.length).to eq(0)
   end
 
 end

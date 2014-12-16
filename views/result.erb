@@ -1,31 +1,13 @@
-<% if @message != "refresh" && @message != "Draw" %>
-  
-  <hgroup><%= @winner.first[:player] %> Wins!</hgroup>
+<hgroup><%= @winner.first['player'] %> Wins!</hgroup>
+  <% if @result != "Draw" %>
+    <section>
+      <% img = @result.split(' ') %>
+      <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
+      <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
+    </section>
+  <% end %>
+<hgroup><%= @result %></hgroup>
   <section>
-    <% img = @message.split(' ') %>
-    <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
-    <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
-  </section>
-  <section>
-    <p><%= @message %></p>
-    <a href="/play/reset" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
+    <a href="/replay" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
     <a href="/" id="exit"><i class="fa fa-share fa-5x"></i></a>
   </section>
-
-<% elsif @message == "Draw" %>
-
-  <hgroup>No Winner</hgroup>
-  <section>
-    <p><%= @message %></p>
-    <a href="/play/reset" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
-    <a href="/" id="exit"><i class="fa fa-share fa-5x"></i></a>
-  </section>
-
-<% elsif @message == "refresh" %>
-
-  <hgroup>
-  <h2>Waiting for other player...</h2>
-  <meta http-equiv="refresh" content="2">
-  </hgroup>
-
-<% end %>

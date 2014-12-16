@@ -1,12 +1,11 @@
   <hgroup>
-    <h2>OK <span class="magenta"><%= @player %></span> you are <br />playing <span class="blue"><%= @other_player %></span>
-    </h2>
+    OK <span class="magenta"><%= @player %></span> you are <br />playing <span class="blue">Me</span>
   </hgroup>
-   <ul>
+  <ul>
   <% @hash.keys.each do |gesture| %>
     <li>
-      <a href="/play?gesture=<%= gesture %>&player=<%= @player %>" id="<%= gesture %>">
-      <img src="/images/<%= gesture %>.svg" class="gesture-image">
+      <a href="/play_gesture?player=<%= @player %>&gesture=<%= gesture %>">
+        <img src="/images/<%= gesture %>.svg" class="gesture-image">
       </a>
     </li>
   <% end %>
