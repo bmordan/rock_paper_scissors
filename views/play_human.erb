@@ -1,10 +1,10 @@
   <hgroup>
-    OK <%= @player[:name] %> are<br />you Ready?
+    OK <%= @player.first[:name] %> are<br />you Ready?
   </hgroup>
   <ul>
   <% @hash.keys.each do |gesture| %>
     <li>
-      <a href="/waiting?player=<%= @player[:name] %>&gesture=<%= gesture %>">
+      <a href="/waiting?player=<%= @player.first[:name] %>&gesture=<%= gesture %>">
         <img src="/images/<%= gesture %>.svg" class="gesture-image">
       </a>
     </li>

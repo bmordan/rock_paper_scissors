@@ -36,13 +36,8 @@ class RockPaperScissors < Sinatra::Base
   end
 
   get '/play_human' do
-    puts GAME.players.length
-
     if GAME.players.length == 2
-      puts GAME.is?(GAME.player(1))
-      puts GAME.is?(GAME.player(2))
-      
-      GAME.is?(GAME.player(1)) ? @player = GAME.player(1) : @player = GAME.player(2)
+      @player = GAME.players.select {|player| player[:session] == session[:session_id]}
       @hash = GAME.gesture_hash
       erb :play_human
     else
@@ -72,7 +67,8 @@ class RockPaperScissors < Sinatra::Base
 
   get '/waiting' do
     GAME.waiting_gestures << params unless GAME.waiting_gestures.include?(params)
-    if GAME.waiting_gestures.length == 2
+    puts GAME.waiting_gestures.inspect
+    if GAME.waiting_gestures.length >= 2
       redirect '/play_gesture'
     else
       erb :waiting
