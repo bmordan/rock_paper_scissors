@@ -1,7 +1,8 @@
 [![Code Climate](https://codeclimate.com/github/bmordan/rock_paper_scissors/badges/gpa.svg)](https://codeclimate.com/github/bmordan/rock_paper_scissors)
+[![Test Coverage](https://codeclimate.com/github/bmordan/rock_paper_scissors/badges/coverage.svg)](https://codeclimate.com/github/bmordan/rock_paper_scissors)
 ###Rock, Paper, Scissors, Spock, Lizard
 ![enter image description here](https://pbs.twimg.com/media/BzBXj1uIIAABtlq.jpg)
-####Create a web app using Sinatra & Ruby.  Write acceptance tests in cucumber and unit tests in rspec.
+####This is an example of a Makers Academy Weekend challange. Create a web app using Sinatra & Ruby.  Write acceptance tests in cucumber and unit tests in rspec. Make a game of Rock Paper Scissors Lizard Spock
 
 ##[Play it now](http://lit-lake-3802.herokuapp.com/)
 
