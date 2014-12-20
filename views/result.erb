@@ -1,11 +1,16 @@
-<hgroup><%= @winner.first['player'] %> Wins!</hgroup>
-  <% if @result != "Draw" %>
-    <section>
-      <% img = @result.split(' ') %>
-      <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
-      <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
-    </section>
-  <% end %>
+<% if @result != "Draw" %>
+  <hgroup><%= @winner.first['player'] %> Wins!</hgroup>
+  <section>
+    <% img = @result.split(' ') %>
+    <img src="/images/<%= img[0] %>.svg" class="gesture-image-win">
+    <img src="/images/<%= img[2] %>.svg" class="gesture-image-lose">
+  </section>
+
+<% else %>
+  <hgroup>Thats</hgroup>
+  <section>a</section>
+<% end %>
+
 <hgroup><%= @result %></hgroup>
   <section>
     <a href="/replay" id="reset"><i class="fa fa-refresh fa-5x"></i></a>

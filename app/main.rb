@@ -61,7 +61,7 @@ class RockPaperScissors < Sinatra::Base
       GAME.players.delete(GAME.player(2))
       redirect '/play_robot'
     else
-      puts "move to human logic"
+      redirect '/play_human'
     end
   end
 
