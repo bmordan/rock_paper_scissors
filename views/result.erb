@@ -7,12 +7,20 @@
   </section>
 
 <% else %>
-  <hgroup>Thats</hgroup>
-  <section>a</section>
+  <section class="draw">
+    <p>That will be a</p>
+  </section>
 <% end %>
 
-<hgroup><%= @result %></hgroup>
   <section>
-    <a href="/replay" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
-    <a href="/" id="exit"><i class="fa fa-share fa-5x"></i></a>
+    <p><%= @result %></p>
   </section>
+
+  <article>
+    <section>
+      <ul>
+        <a href="/replay" id="reset"><i class="fa fa-refresh fa-5x"></i></a>
+        <a href="/" id="exit"><i class="fa fa-share fa-5x"></i></a>
+      </ul>
+    </section>
+  </article>

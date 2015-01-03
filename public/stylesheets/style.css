@@ -12,6 +12,9 @@ span.magenta{color: rgb(163,23,173);}
 span.blue{color: rgb(23,33,173);}
 a{text-decoration: none;color: rgb(33,173,23);}
 li{list-style-type: none;}
+body main header{
+  height: 3em;
+}
 /* home.erb */
 body main form{
   width:80%;
@@ -25,9 +28,10 @@ body main form input{
   text-align: center;
   width: 100%;
 }
-/* game_mode.erb */
+/* select_game_mode.erb */
 body main hgroup{
-  font-size: 2em;
+  width: 90%;
+  font-size: 1.8em;
   text-align: center;
   margin: 3em auto 1.5em auto;
 }
@@ -35,12 +39,25 @@ body main section{
   width: 95%;
   margin: auto;
 }
+body main section.draw{
+  margin-top: 9em;
+}
 body main section p{
   text-align: center;
 }
+body main article section ul{
+  display: block;
+  margin-top: 2.7em;
+}
+body main article section ul a:nth-of-type(1){
+  float: left;
+}
+body main article section ul a:nth-of-type(2){
+  float: right;
+}
 /* play_human play_robot */
 body main ul{
-  width:70%;
+  width:51%;
   margin:auto;
 }
 body main li{
@@ -53,10 +70,13 @@ body main .gesture-image{
 /* result */
 body main .gesture-image-win{
   width: 48%;
+  margin-bottom: 4%;
 }
 body main .gesture-image-lose{
+  float: right;
   margin-left: 2em;
   padding-bottom: 1.6em;
   width: 33%;
 }
+
 
